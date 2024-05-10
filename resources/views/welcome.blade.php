@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Ecommerce</title>
-    <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
 
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="path/to/your/styles.css">
+
+    <!-- Estilos en línea -->
+    <style>
         /* Video de fondo */
         #video-background {
             position: fixed;
@@ -26,63 +24,55 @@
             background-size: cover;
         }
 
-        /* Barra de navegación */
-        .navbar {
-            position: fixed;
-            top: 0;
+        /* Estilos para el tablón de anuncios */
+        .ad-board {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .ad-card {
+            flex: 1 0 calc(33.333% - 16px);
+            border: 1px solid #ccc;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .ad-card img {
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            z-index: 1000;
+            height: auto;
+            border-radius: 8px;
         }
 
-        /* Enlaces de navegación */
-        .nav-links {
-            display: flex;
-            gap: 20px; /* Espaciamiento entre enlaces */
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .ad-card h3 {
+            margin: 10px 0;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #FF2D20;
-            transition: background-color 0.3s;
-            /* Agrega una sombra sutil */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .ad-card p {
+            margin: 10px 0;
         }
 
-        .nav-links a:hover {
-            background-color: #D6301F;
+        .ad-card .price {
+            font-weight: bold;
+            color: #d9534f;
         }
 
-        /* Botón de menú (hamburguesa) */
-        .menu-toggle {
-            display: none; /* Ocultado por defecto */
-            font-size: 24px;
+        .ad-card button {
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
         }
 
-        /* Estilos responsivos */
-        @media (max-width: 768px) {
-            /* Mostrar el botón de menú y ocultar los enlaces de navegación */
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px; /* Espaciamiento en columnas */
-            }
-
-            .menu-toggle {
-                display: block; /* Muestra el botón de menú */
-            }
+        .ad-card button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -90,23 +80,12 @@
     <!-- Video de fondo -->
     <video autoplay muted loop id="video-background">
         <source src="videos/fondo4.mp4" type="video/mp4">
-        <!-- Mensaje si el navegador no soporta video -->
         Tu navegador no soporta la etiqueta de video.
     </video>
 
-    <!-- Barra de navegación -->
-    <div class="navbar">
-        <!-- Botón de menú (hamburguesa) -->
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-        <!-- Contenedor de enlaces de navegación -->
-        <ul id="nav-links" class="nav-links">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Contacto</a></li>
-
-            <!-- Opciones de login y registro -->
+    <!-- Menú de navegación -->
+    <nav>
+        <ul id="nav-links">
             @if (Route::has('login'))
                 @auth
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
@@ -118,25 +97,46 @@
                 @endauth
             @endif
         </ul>
+    </nav>
+
+    <!-- Tablón de anuncios -->
+    <div class="ad-board">
+        <!-- Ejemplo de anuncio -->
+        <div class="ad-card">
+            <img src="img/imagen.jpg" alt="Imagen del anuncio 1">
+            <h3>Título del anuncio 1</h3>
+            <p>Descripción breve del anuncio 1.</p>
+            <p class="price">$100</p>
+            <button>Comprar</button>
+        </div>
+
+        <div class="ad-card">
+            <img src="img/imagen1.jpg" alt="Imagen del anuncio 2">
+            <h3>Título del anuncio 2</h3>
+            <p>Descripción breve del anuncio 2.</p>
+            <p class="price">$150</p>
+            <button>Comprar</button>
+        </div>
+
+        <div class="ad-card">
+            <img src="img/imagen.jpg" alt="Imagen del anuncio 2">
+            <h3>Título del anuncio 2</h3>
+            <p>Descripción breve del anuncio 2.</p>
+            <p class="price">$150</p>
+            <button>Comprar</button>
+        </div>
+
     </div>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <h1>Bienvenidos a Nuestro Ecommerce</h1>
-        <p>Encuentra los mejores productos aquí</p>
-    </div>
-
-    <!-- JavaScript para manejar el menú desplegable -->
+    <!-- JavaScript -->
+    <script src="path/to/your/scripts.js"></script>
     <script>
+        // Manejar el menú desplegable
         function toggleMenu() {
             const navLinks = document.getElementById('nav-links');
-            // Cambia entre mostrar u ocultar los enlaces de navegación
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-            } else {
-                navLinks.style.display = 'flex';
-            }
+            navLinks.style.display = (navLinks.style.display === 'flex') ? 'none' : 'flex';
         }
     </script>
 </body>
 </html>
+
